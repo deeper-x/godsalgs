@@ -15,9 +15,13 @@ type Node struct {
 }
 
 // NewNode is the constructor for the linked list
-// It resets the linked list string as well
+// It resets the linked list string and counter as well
 func NewNode(v int) *Node {
+	// setup
+	c = 0
 	ll = ""
+
+	// build
 	return &Node{Value: v}
 }
 
