@@ -5,8 +5,11 @@ import (
 	"strconv"
 )
 
-var ll string
-var c int
+// llrepr is the string representation of the linked list
+var llrepr string
+
+// counter is a counter used to keep track of the length of the linked list
+var counter int
 
 // Node is the linked list node implementation
 type Node struct {
@@ -18,11 +21,13 @@ type Node struct {
 // It resets the linked list string and counter as well
 func NewNode(v int) *Node {
 	// setup
-	c = 0
-	ll = ""
+	counter = 0
+	llrepr = ""
 
 	// build
-	return &Node{Value: v}
+	return &Node{
+		Value: v,
+	}
 }
 
 // Add adds a new node to the linked list
@@ -40,6 +45,7 @@ func (n *Node) Delete(v int) bool {
 	if n.Next == nil {
 		return false
 	}
+
 	if n.Next.Value == v {
 		n.Next = n.Next.Next
 		return true
@@ -64,10 +70,10 @@ func (n *Node) Tail() *Node {
 
 // Replace replaces a node with another node
 func (n *Node) Replace(v, w int) bool {
-	c++
+	counter++
 	tot := n.Length()
 
-	if c > tot {
+	if counter > tot {
 		return false
 	}
 
@@ -90,15 +96,17 @@ func (n *Node) Length() int {
 
 // Print prints the linked list
 func (n *Node) Print() string {
-	if len(ll) == 0 {
-		ll += fmt.Sprintf("%v", strconv.Itoa(n.Value))
-	} else {
-		ll += fmt.Sprintf("->%v", strconv.Itoa(n.Value))
+	prefix := ">"
+
+	if len(llrepr) != 0 {
+		prefix = "->"
 	}
+
+	llrepr += fmt.Sprintf("%s%v", prefix, strconv.Itoa(n.Value))
 
 	if n.Next != nil {
 		n.Next.Print()
 	}
 
-	return ll
+	return llrepr
 }

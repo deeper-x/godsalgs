@@ -57,7 +57,7 @@ func TestPrint(t *testing.T) {
 	n.Add(3)
 
 	res := n.Print()
-	extd := "1->2->3"
+	extd := ">1->2->3"
 
 	if res != extd {
 		t.Error("Expected: " + extd + " Got: " + res)
